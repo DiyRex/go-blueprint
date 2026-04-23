@@ -82,16 +82,6 @@ func InitGoMod(projectName string, appDir string) error {
 		return err
 	}
 
-	// Pin the go directive so generated projects can resolve modern transitive
-	// deps (e.g. filippo.io/edwards25519@v1.2.0 needs Go 1.24, golang.org/x/sys
-	// @v0.43.0 needs Go 1.25). With GOTOOLCHAIN=auto (the default on Go 1.21+)
-	// older toolchains will transparently fetch a compatible Go when needed.
-	if err := ExecuteCmd("go",
-		[]string{"mod", "edit", "-go=1.25.0"},
-		appDir); err != nil {
-		return err
-	}
-
 	return nil
 }
 
